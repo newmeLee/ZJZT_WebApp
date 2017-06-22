@@ -1,0 +1,38 @@
+package com.zjzt.webService;
+
+import javax.jws.WebParam;
+import javax.jws.WebResult;
+import javax.jws.WebService;
+
+@WebService(name = "ZJZT_HealthNews", // 服务实现类的名称
+serviceName = "ZJZT_HealthNewsService", // 默认在发布的服务实现者的名称后面添加Service
+portName = "ZJZT_HealthNewsServicePort", // 服务类型的名称: 默认在 发布的服务实现者(MyWebService)
+targetNamespace = "webService.zjzt.com" // 发布ws服务的命名空间,此空间默认为当前服务包路径的 "倒写"此名称也是
+)
+public interface HealthInfoService {
+
+	/**
+	 * 获取健康新闻(获取所有)
+	 * 
+	 * @return
+	 */
+	public @WebResult(name = "HealthNews")
+	String getAllHealthNews();
+
+	/**
+	 * 
+	 * @param id
+	 *            新闻分类
+	 * @return
+	 */
+	public @WebResult(name = "HealthNews")
+	String getHealthNewsById(@WebParam(name = "classId") int id);
+
+	/**
+	 * 
+	 * @return
+	 */
+	public @WebResult(name = "HealthNewsClass")
+	String getHealthNewsClass();
+
+}

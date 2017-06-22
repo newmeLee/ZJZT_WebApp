@@ -1,0 +1,63 @@
+package com.zjzt.webService;
+
+import com.google.gson.Gson;
+import com.zjzt.bean.NewsClassForJsonBean;
+import com.zjzt.bean.NewsForJsonBean;
+import com.zjzt.dao.DataBaseUtil;
+
+
+public class HealthInfoServiceImpl implements HealthInfoService {
+	Gson gson=new Gson();
+	DataBaseUtil dbUtil=new DataBaseUtil();
+	NewsForJsonBean news=new NewsForJsonBean();
+	NewsClassForJsonBean newsClass=new NewsClassForJsonBean();
+	/**
+	 * 获取所有新闻
+	 */
+	public String getAllHealthNews(String userId,String password) {	
+		if(dbUtil.UserValidate(userId, password)){
+			news.status=true;
+			news.message="成功获取数据";
+			news.newsList=dbUtil.getDetaliNews();
+			//System.out.println("传输结果："+news);
+		}
+		else
+		{
+			news.status=false;
+			news.message="用户名和密码验证失败！";
+		}
+		return gson.toJson(news);
+	}
+	/**
+	 * 获取健康新闻
+	 */
+	public String getHealthNewsById(String userId,String password,int classId){
+		if(dbUtil.UserValidate(userId, password)){
+			news.status=true;
+			news.message="成功获取数据";
+			news.newsList=dbUtil.getDetaliNews(classId);
+		}
+		else
+		{
+			news.status=false;
+			news.message="用户名和密码验证失败！";
+		}
+		return gson.toJson(news);
+	} 
+	/** 
+	 * 获取健康新闻分类列表
+	 */
+	public String getHealthNewsClass(String userId,String password){
+		if(dbUtil.UserValidate(userId, password)){
+			newsClass.status=true;
+			newsClass.message="获取数据成功";
+			newsClass.classList= dbUtil.getNewsInfoClass();
+		}
+		else
+		{
+			newsClass.status=false;
+			newsClass.message="用户名和密码验证失败！";
+		}
+		return gson.toJson(newsClass);
+	}
+}

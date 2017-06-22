@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="emp" extends="struts-default">
+		<!-- Ation实例交给spring容器创建 -->
+		<!-- 首页action -->		
+		<action name="index" class="indexAction" method="index">
+			<result name="success">/index.jsp</result>
+		</action>
+		<!-- 产品服务的action -->
+		<action name="product_List" class="productAction" method="product_List">
+			<result name="success">/services.jsp</result>
+		</action>
+		<action name="getProductById" class="productAction" method="getProductById">
+			<result name="success">/service_detail.jsp</result>
+		</action>
+		<!-- 业务项目相关action -->
+		<action name="getAllProject" class="projectAction" method="getAllProject">
+			<result name="success">/project.jsp</result>
+		</action>
+		<action name="getProjectById" class="projectAction" method="getProjectById">
+			<result name="success">/project_detail.jsp</result>
+		</action>
+		<!-- 新闻通知的action -->
+		<action name="getAllNews" class="newsAction" method="getAllNews">
+			<result name="success">/index.jsp</result>
+		</action>
+		<action name="getNewsById" class="newsAction" method="getNewsById">
+			<result name="success">/news_detail.jsp</result>
+		</action>
+		<action name="newsList" class="newsAction" method="getAllNews">
+			<result name="success">/news_list.jsp</result>
+		</action>
+		
+	</package>
+	<!-- 后台action -->
+	<include file="zjzt/xconfig/backStruts.xml"></include>
+	<!-- 引用JsonAction -->
+	<include file="zjzt/xconfig/jsonStruts.xml"></include>
+</struts>

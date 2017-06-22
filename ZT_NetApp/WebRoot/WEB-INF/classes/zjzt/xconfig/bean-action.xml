@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Action 需要引入Service -->
+	<!-- 1.首页action -->
+	<bean id="indexAction" class="zjzt.action.IndexAction" scope="prototype">
+		<property name="productService" ref="productService"></property>
+		<property name="projectService" ref="projectService"></property>
+		<property name="newsService" ref="newsService"></property>
+	</bean>
+	<!-- 2.产品product模块 -->
+	<bean id="productAction" class="zjzt.action.ProductAction" scope="prototype">
+		<property name="productService" ref="productService"></property>
+	</bean>
+	<!-- 3.业务项目模块 -->
+	<bean id="projectAction" class="zjzt.action.ProjectAction" scope="prototype">
+		<property name="projectService" ref="projectService"></property>
+	</bean>
+	<!-- 4.新闻通知Action -->
+	<bean id="newsAction" class="zjzt.action.NewsAction" scope="prototype">
+		<property name="newsService" ref="newsService"></property>
+	</bean>
+	<!-- 5.用户反馈Action -->
+	<bean id="feedbackAction" class="zjzt.action.FeedbackAction" scope="prototype">
+		<property name="feedbackService" ref="feedbackService"></property>
+	</bean>
+	
+	<!-- 图片上传action -->
+	<bean id="uploadAction" class="zjzt.action.PicUploadAction" scope="prototype">
+	</bean>
+</beans>

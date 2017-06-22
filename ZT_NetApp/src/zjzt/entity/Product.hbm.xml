@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    	
+<hibernate-mapping package="zjzt.entity">
+	<class name="Product" table="t_product">
+		<id name="id" column="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="title" column="title"></property>
+		<property name="keyword" column="keyword"></property>
+		<property name="content" column="content"></property>
+		<property name="describe1" column="describe1"></property>
+		<property name="describe2" column="describe2"></property>
+		<property name="describe3" column="describe3"></property>
+		<property name="describe4" column="describe4"></property>
+		<property name="describe5" column="describe5"></property>
+		<property name="picUrl" column="pic_url"></property>
+		<property name="picUrl1" column="pic_url1"></property>
+		<property name="picUrl2" column="pic_url2"></property>
+		<property name="picUrl3" column="pic_url3"></property>
+		<property name="type" column="type"></property>
+		<property name="orderNo" column="order_no"></property>
+	</class>
+</hibernate-mapping>
+	

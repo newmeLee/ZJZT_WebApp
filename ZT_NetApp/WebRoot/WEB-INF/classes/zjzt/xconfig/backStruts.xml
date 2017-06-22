@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 后台action -->
+	<package name="backStage" extends="struts-default">
+		<!-- 新闻action -->		
+		<action name="news" class="newsAction" method="getAllNews">
+			<result name="success">/backStage/news.jsp</result>
+		</action>
+		<action name="saveOrUpdateNews" class="newsAction" method="saveOrUpdateNews">
+			<result name="success" type="chain">news</result>
+		</action>
+		<action name="getAllProduct" class="productAction" method="product_List">
+			<result name="success">/backStage/product.jsp</result>
+		</action>
+		<action name="deleteProduct" class="productAction" method="deleteProduct">
+			<result name="success" type="chain">getAllProduct</result>
+		</action>
+		<!-- 后台项目管理 -->
+		<action name="project" class="projectAction" method="getAllProject">
+			<result name="success">/backStage/project.jsp</result>
+		</action>
+		<action name="deleteProject" class="projectAction" method="deleteProject">
+			<result name="success" type="chain">project</result>
+		</action>
+		<action name="feedback" class="feedbackAction" method="getAllFeedback">
+			<result name="success">/backStage/feeds.jsp</result>
+		</action>
+	</package>
+</struts>

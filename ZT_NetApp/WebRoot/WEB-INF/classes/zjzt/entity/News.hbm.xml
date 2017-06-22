@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    	
+<hibernate-mapping package="zjzt.entity">
+	<class name="News" table="t_news">
+		<id name="id" column="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="title" column="news_title"></property>
+		<property name="keyword" column="keyword"></property>
+		<property name="content" column="content"></property>
+		<property name="creater" column="creater"></property>
+		<property name="gmtCreate" column="gmt_create"></property>
+		<property name="gmtModified" column="gmt_modified"></property>
+	</class>
+</hibernate-mapping>
+	

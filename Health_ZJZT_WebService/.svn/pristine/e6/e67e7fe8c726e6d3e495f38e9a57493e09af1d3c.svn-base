@@ -1,0 +1,44 @@
+package com.zjzt.webService;
+
+import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.zjzt.bean.HealthNewsBean;
+import com.zjzt.bean.NewsClassBean;
+import com.zjzt.dao.DataBaseUtil;
+
+
+public class HealthInfoServiceImpl implements HealthInfoService {
+	Gson gson=new Gson();
+	DataBaseUtil dbUtil=new DataBaseUtil();
+	ArrayList<HealthNewsBean> news=new ArrayList<HealthNewsBean>();
+	ArrayList<NewsClassBean> classList =new ArrayList<NewsClassBean>();
+	/**
+	 * 获取所有新闻
+	 */
+	public String getAllHealthNews(String userId,String password) {	
+		if(dbUtil.UserValidate(userId, password)){
+			news=dbUtil.getDetaliNews();
+			System.out.println("传输结果："+news);
+		}
+		return gson.toJson(news);
+	}
+	/**
+	 * 获取健康新闻
+	 */
+	public String getHealthNewsById(String userId,String password,int classId){
+		if(dbUtil.UserValidate(userId, password)){
+			news=dbUtil.getDetaliNews(classId);
+		}
+		return gson.toJson(news);
+	} 
+	/** 
+	 * 获取健康新闻分类列表
+	 */
+	public String getHealthNewsClass(String userId,String password){
+		if(dbUtil.UserValidate(userId, password)){
+			classList= dbUtil.getNewsInfoClass();
+		}
+		return gson.toJson(classList);
+	}
+}

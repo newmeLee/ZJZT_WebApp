@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+    	
+<hibernate-mapping package="zjzt.entity">
+	<class name="Feedback" table="t_feedback">
+		<id name="id" column="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="userName" column="user_name"></property>
+		<property name="userEmail" column="user_email"></property>
+		<property name="userPhone" column="user_phone"></property>
+		<property name="message" column="message"></property>
+		<property name="gmtCreate" column="gmt_create"></property>
+	</class>
+</hibernate-mapping>
+	

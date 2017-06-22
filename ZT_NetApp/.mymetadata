@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="ZT_NetApp"
+  id="myeclipse.1495697735881"
+  context-root="/ZT_NetApp"
+  j2ee-spec="5.0"
+  archive="ZT_NetApp.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

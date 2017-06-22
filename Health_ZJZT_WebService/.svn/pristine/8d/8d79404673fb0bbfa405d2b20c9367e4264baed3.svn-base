@@ -1,0 +1,27 @@
+package com.zjzt.bean;
+
+import java.util.ArrayList;
+/**
+ * 新闻转为JSON后的实体
+ * @author Administrator
+ *
+ */
+public class NewsForJsonBean {
+	//新闻分类
+	public int info_class;
+	public boolean status;
+	public ArrayList<HealthNewsBean> newsList;
+	public int getInfo_class() {
+		return info_class;
+	}
+	public void setInfo_class(int info_class) {
+		this.info_class = info_class;
+	}
+	public ArrayList<HealthNewsBean> getNewsList() {
+		return newsList;
+	}
+	public void setNewsList(ArrayList<HealthNewsBean> newsList) {
+		this.newsList = newsList;
+	}
+	
+}

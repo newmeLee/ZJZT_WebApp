@@ -1,0 +1,5 @@
+#Mon Jun 12 11:28:47 CST 2017
+eclipse.preferences.version=1
+validator.Checked=WebRoot/bootstrap,WebRoot/js,WebRoot/editor,WebRoot/backStage/netCss,WebRoot/backStage/netJs,WebRoot/css
+validator.Revalidate=true
+validator.Unchecked=

@@ -1,0 +1,162 @@
+package com.zjzt.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.zjzt.bean.HealthNewsBean;
+import com.zjzt.bean.NewsClassBean;
+import com.zjzt.bean.UserOptionBean;
+
+public class DataBaseUtil {
+	static String sql = null;
+	static DBHelper db1 = null;
+	static ResultSet ret = null;
+
+	//
+	ArrayList<UserOptionBean> optionList=null;
+	/**
+	 * 用户验证，用来验证用户的正确性
+	 * 
+	 * @param userId
+	 *            账号
+	 * @param password
+	 *            密码
+	 * @return
+	 */
+	public boolean UserValidate(String userId, String password) {
+		boolean flag = false;
+		sql = "select * from webservice_users where userId='" + userId
+				+ "' And password='" + password + "'";
+		db1 = new DBHelper(sql);// 创建DBHelper对象
+		System.out.println(sql);
+		try {
+			ret = db1.pst.executeQuery();
+			ret.last(); // 定位到最后一行
+			int rowCount = ret.getRow(); // 取得最后一行的行号，即查询结果集的记录总行数
+			if (rowCount > 0) {
+
+				flag = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}// 执行语句，得到结果集
+		return flag;
+	}
+
+	/**
+	 * 获取详细的新闻信息
+	 * 
+	 * @return
+	 */
+	public ArrayList<HealthNewsBean> getDetaliNews() {
+		sql = "select * from health_news";
+		return getResultBySql(sql);
+	}
+
+	/**
+	 * 根据新闻分类获取新闻详细信息
+	 * 
+	 * @param classId
+	 *            ：新闻分类ID
+	 * @return
+	 */
+	public ArrayList<HealthNewsBean> getDetaliNews(int classId) {
+		StringBuilder sbSql = new StringBuilder();
+		sbSql.append("SELECT * FROM health_news ");
+		sbSql.append(" WHERE info_class =" + classId + "");
+		return getResultBySql(sbSql.toString());
+	}
+
+	/**
+	 * 获取新闻分类
+	 * 
+	 * @return
+	 */
+	public ArrayList<NewsClassBean> getNewsInfoClass() {
+		ArrayList<NewsClassBean> classList = new ArrayList<NewsClassBean>();
+		sql = "select * from news_class";// SQL语句
+		db1 = new DBHelper(sql);// 创建DBHelper对象
+		try {
+			ret = db1.pst.executeQuery();// 执行语句，得到结果集
+			while (ret.next()) {
+				NewsClassBean classBean = new NewsClassBean();
+				classBean
+						.setClassId(Integer.parseInt(ret.getString("class_id")));
+				classBean.setClassName(ret.getString("class_name"));
+				// System.out.println("分类名称：" + ret.getString("class_name"));
+				classList.add(classBean);
+			}// 显示数据
+			ret.close();
+			db1.close();// 关闭连接
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return classList;
+	}
+
+	/**
+	 * 根据sql语句查询新闻数据
+	 * 
+	 * @param sql
+	 * @return
+	 */
+	public ArrayList<HealthNewsBean> getResultBySql(String sql) {
+		ArrayList<HealthNewsBean> newsList = new ArrayList<HealthNewsBean>();
+		db1 = new DBHelper(sql);// 创建DBHelper对象
+		try {
+			ret = db1.pst.executeQuery();// 执行语句，得到结果集
+			System.out.println("结果行数:" + ret.getRow());
+			while (ret.next()) {
+				HealthNewsBean newsBean = new HealthNewsBean();
+				newsBean.setKeyWord(ret.getString("keyword"));
+
+				newsBean.setTitle(ret.getString("title"));
+				newsBean.setSummary(ret.getString("summary"));
+				newsBean.setContent(ret.getString("content"));
+				newsBean.setImg(ret.getString("img"));
+				newsBean.setInfo_class(Integer.parseInt(ret
+						.getString("info_class")));
+				newsBean.setPublishDate((ret.getString("publish_date")));
+				newsList.add(newsBean);
+				// System.out.println("分类编号"+ret.getString(1) + "\t 分类名称" +
+				// ret.getString(2));
+			}// 显示数据
+			ret.close();
+			db1.close();// 关闭连接
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return newsList;
+	}
+	/**
+	 * 获取用户选项页的列表信息
+	 * @return
+	 */
+	public ArrayList<UserOptionBean> getUserOption(){
+		optionList=new ArrayList<UserOptionBean>();
+		sql = "select * from user_option";// SQL语句
+		db1 = new DBHelper(sql);// 创建DBUtil对象
+		try {
+			ret = db1.pst.executeQuery();// 执行语句，得到结果集
+			while (ret.next()) {
+				UserOptionBean optionBean = new UserOptionBean();
+				optionBean.setOptionId(Integer.parseInt(ret
+						.getString("option_id")));
+				System.out.println("选项编号：" + ret.getString("option_id"));
+				optionBean.setOptionName(ret.getString("option_name"));
+				optionBean.setOptionIcon(ret.getString("option_icon"));
+				optionBean.setOrderNo(Integer.parseInt(ret
+						.getString("order_no")));
+				optionBean.setOptionUrl(ret.getString("option_url"));
+				// System.out.println("分类名称：" + ret.getString("class_name"));
+				optionList.add(optionBean);
+			}// 显示数据
+			ret.close();
+			db1.close();// 关闭连接
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return optionList;
+	}
+}
